@@ -1,13 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.github.mohitsoni</groupId>
+	<groupId>com.github.willroden</groupId>
 	<artifactId>marathon-client</artifactId>
 	<packaging>jar</packaging>
-	<version>0.4.3-SNAPSHOT</version>
+	<version>0.4.3</version>
 	<name>marathon-client</name>
 	<description>A Java API client for Mesosphere's Marathon.</description>
-	<url>https://github.com/mohitsoni/marathon-client</url>
+	<url>https://github.com/willroden/marathon-client</url>
 
 	<parent>
 		<groupId>org.sonatype.oss</groupId>
@@ -72,18 +72,22 @@
 
 	<scm>
 		<tag>master</tag>
-		<url>git@github.com:mohitsoni/marathon-client.git</url>
-		<connection>scm:git:git@github.com:mohitsoni/marathon-client.git</connection>
-		<developerConnection>scm:git:git@github.com:mohitsoni/marathon-client.git</developerConnection>
+		<url>git@github.com:willroden/marathon-client.git</url>
+		<connection>scm:git:git@github.com:willroden/marathon-client.git</connection>
+		<developerConnection>scm:git:git@github.com:willroden/marathon-client.git</developerConnection>
 	</scm>
 
 	<issueManagement>
 		<system>Github issues</system>
-		<url>https://github.com/mohitsoni/marathon-client/issues</url>
+		<url>https://github.com/willroden/marathon-client/issues</url>
 	</issueManagement>
 
 	<developers>
 		<developer>
+			<name>Will Roden</name>
+			<email>will@roden.cc</email>
+		</developer>
+        <developer>
 			<name>Mohit Soni</name>
 			<email>mohitsoni1989@gmail.com</email>
 		</developer>
