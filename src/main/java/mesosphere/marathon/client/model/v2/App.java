@@ -168,7 +168,7 @@ public class App {
     public void setHealthChecks(Collection<HealthCheck> healthChecks) {
         this.healthChecks = healthChecks;
     }
-    
+
 	@Override
 	public String toString() {
 		return ModelUtils.toString(this);
