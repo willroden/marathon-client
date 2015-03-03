@@ -169,6 +169,11 @@ public class App {
         this.healthChecks = healthChecks;
     }
 
+    public void addHealthCheck(HealthCheck healthCheck) {
+        this.healthChecks = (this.healthChecks != null) ? this.healthChecks : new ArrayList<HealthCheck>();
+        this.healthChecks.add(healthCheck);
+    }
+
 	@Override
 	public String toString() {
 		return ModelUtils.toString(this);
