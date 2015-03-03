@@ -23,8 +23,17 @@ public class App {
 	private Integer tasksStaged;
 	private Integer tasksRunning;
     private Collection<HealthCheck> healthChecks;
+    private UpgradeStrategy upgradeStrategy;
 
-	public String getId() {
+    public UpgradeStrategy getUpgradeStrategy() {
+        return upgradeStrategy;
+    }
+
+    public void setUpgradeStrategy(UpgradeStrategy upgradeStrategy) {
+        this.upgradeStrategy = upgradeStrategy;
+    }
+
+    public String getId() {
 		return id;
 	}
 

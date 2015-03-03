@@ -46,6 +46,14 @@ public class MarathonClientTest {
         assertThat(healthChecks, (Matcher) hasItem(hasProperty("path", is("/health"))));
     }
 
+    @Test
+    public void testUpgradeStrategy() throws IOException, MarathonException {
+        server.enqueue(new MockResponse().setBody(getBufferFromResourceFile("marathon-sample-app.json")));
+        App app = marathon.getApp("foo").getApp();
+        assertThat(app.getUpgradeStrategy().getMinimumHealthCapacity(), equalTo(0.5));
+        assertThat(app.getUpgradeStrategy().getMaximumOverCapacity(), equalTo(0.2));
+    }
+
     public Buffer getBufferFromResourceFile(String resourceFileName) throws IOException {
         return new Buffer().readFrom(this.getClass().getResourceAsStream(resourceFileName));
     }
