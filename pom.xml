@@ -4,7 +4,7 @@
 	<groupId>cc.roden</groupId>
 	<artifactId>marathon-client</artifactId>
 	<packaging>jar</packaging>
-	<version>0.4.5-SNAPSHOT</version>
+	<version>0.4.5</version>
 	<name>marathon-client</name>
 	<description>A Java API client for Mesosphere's Marathon.</description>
 	<url>https://github.com/willroden/marathon-client</url>
@@ -72,7 +72,7 @@
 	</licenses>
 
 	<scm>
-		<tag>master</tag>
+		<tag>marathon-client-0.4.5</tag>
 		<url>git@github.com:willroden/marathon-client.git</url>
 		<connection>scm:git:git@github.com:willroden/marathon-client.git</connection>
 		<developerConnection>scm:git:git@github.com:willroden/marathon-client.git</developerConnection>
