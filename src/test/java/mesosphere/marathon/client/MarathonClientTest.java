@@ -17,7 +17,7 @@ import mesosphere.marathon.client.model.v2.HealthCheck;
 import mesosphere.marathon.client.utils.MarathonException;
 import okio.Buffer;
 
-import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.beans.HasPropertyWithValue.hasProperty;
 import static org.hamcrest.core.Is.is;
@@ -52,6 +52,35 @@ public class MarathonClientTest {
         App app = marathon.getApp("foo").getApp();
         assertThat(app.getUpgradeStrategy().getMinimumHealthCapacity(), equalTo(0.5));
         assertThat(app.getUpgradeStrategy().getMaximumOverCapacity(), equalTo(0.2));
+    }
+
+    @Test
+    public void testUpdateApp() throws IOException, MarathonException, InterruptedException {
+        final String appId = "/product/service/my-app";
+        server.enqueue(new MockResponse().setBody(getBufferFromResourceFile("marathon-sample-app.json")));
+        server.enqueue(new MockResponse().setResponseCode(200));
+
+        App app = marathon.getApp(appId).getApp();
+        assertThat(
+                app,
+                allOf(hasProperty("id", is(appId)), hasProperty("mem", is(256.0)))
+        );
+        assertThat(
+                server.takeRequest(),
+                allOf(hasProperty("method", is("GET")), hasProperty("path", is("/v2/apps" + appId)))
+        );
+
+        app.setMem(512.0);
+        marathon.updateApp(appId, app, true);
+        assertThat(
+                server.takeRequest(),
+                allOf(
+                        hasProperty("method", is("PUT")),
+                        hasProperty("path", is("/v2/apps" + appId + "?force=true")),
+                        hasProperty("utf8Body", containsString("\"mem\": 512.0"))
+                )
+        );
+
     }
 
     public Buffer getBufferFromResourceFile(String resourceFileName) throws IOException {
