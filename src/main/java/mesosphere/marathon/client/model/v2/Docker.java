@@ -8,8 +8,17 @@ public class Docker {
 	private String image;
 	private String network;
 	private Collection<Port> portMappings;
+    private Boolean forcePullImage;
 
-	public String getImage() {
+    public Boolean getForcePullImage() {
+        return forcePullImage;
+    }
+
+    public void setForcePullImage(Boolean forcePullImage) {
+        this.forcePullImage = forcePullImage;
+    }
+
+    public String getImage() {
 		return image;
 	}
 
@@ -32,7 +41,7 @@ public class Docker {
 	public void setPortMappings(Collection<Port> portMappings) {
 		this.portMappings = portMappings;
 	}
-	
+
 	@Override
 	public String toString() {
 		return ModelUtils.toString(this);
