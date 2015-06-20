@@ -10,6 +10,7 @@
     "container": {
       "type": "DOCKER",
       "docker": {
+        "forcePullImage": true,
         "image": "group/image",
         "network": "BRIDGE",
         "portMappings": [

@@ -39,6 +39,7 @@ public class MarathonClientTest {
     public void testGetApp() throws IOException, MarathonException {
         server.enqueue(new MockResponse().setBody(getBufferFromResourceFile("marathon-sample-app.json")));
         App app = marathon.getApp("foo").getApp();
+        assertThat(app.getContainer().getDocker().getForcePullImage(), equalTo(true));
         assertThat(app.getInstances(), equalTo(3));
         assertThat(app.getContainer().getDocker().getImage(), equalTo("group/image"));
         assertThat(app.getHealthChecks().size(), equalTo(3));
