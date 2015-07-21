@@ -45,6 +45,8 @@ public class MarathonClientTest {
         assertThat(app.getHealthChecks().size(), equalTo(3));
         List<HealthCheck> healthChecks = new ArrayList<HealthCheck>(app.getHealthChecks());
         assertThat(healthChecks, (Matcher) hasItem(hasProperty("path", is("/health"))));
+        assertThat(app.getDeployments().size(), equalTo(1));
+        assertThat(app.getDeployments(), (Matcher)  hasItem(hasProperty("id", is("5cd987cd-85ae-4e70-8df7-f1438367d9cb"))));
     }
 
     @Test
@@ -78,7 +80,8 @@ public class MarathonClientTest {
                 allOf(
                         hasProperty("method", is("PUT")),
                         hasProperty("path", is("/v2/apps" + appId + "?force=true")),
-                        hasProperty("utf8Body", containsString("\"mem\": 512.0"))
+                        hasProperty("utf8Body", containsString("\"mem\": 512.0")),
+                        not(hasProperty("deployments", anything()))
                 )
         );
 
