@@ -24,6 +24,7 @@ public class App {
 	private Integer tasksRunning;
     private Collection<HealthCheck> healthChecks;
     private UpgradeStrategy upgradeStrategy;
+    private Collection<Deployment> deployments;
 
     public UpgradeStrategy getUpgradeStrategy() {
         return upgradeStrategy;
@@ -181,6 +182,19 @@ public class App {
     public void addHealthCheck(HealthCheck healthCheck) {
         this.healthChecks = (this.healthChecks != null) ? this.healthChecks : new ArrayList<HealthCheck>();
         this.healthChecks.add(healthCheck);
+    }
+
+    public Collection<Deployment> getDeployments() {
+        return deployments;
+    }
+
+    public void setDeployments(Collection<Deployment> deployments) {
+        this.deployments = deployments;
+    }
+    
+    public void addDeployment(Deployment deployment) {
+        this.deployments = (this.deployments != null) ? this.deployments : new ArrayList<Deployment>();
+        this.deployments.add(deployment);
     }
 
 	@Override
