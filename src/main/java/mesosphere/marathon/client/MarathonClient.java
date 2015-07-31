@@ -10,22 +10,42 @@ import feign.codec.ErrorDecoder;
 import feign.gson.GsonDecoder;
 import feign.gson.GsonEncoder;
 
-public class MarathonClient {
-	static class MarathonHeadersInterceptor implements RequestInterceptor {
+public final class MarathonClient {
+	private MarathonClient() {
+	}
+
+	static final class MarathonHeadersInterceptor implements RequestInterceptor {
 		@Override
 		public void apply(RequestTemplate template) {
 			template.header("Accept", "application/json");
-			template.header("Content-Type", "application/json");
+			if (requestSendsBody(template)) {
+				template.header("Content-Type", "application/json");
+			}
+		}
+
+		private static boolean requestSendsBody(RequestTemplate template) {
+			return requestMethodSendsBody(template.method());
+		}
+
+		private static boolean requestMethodSendsBody(String method) {
+			// RFC 2616 §5.1.1: Method tokens are case-sensitive.
+			switch (method) {
+			case "POST":
+			case "PUT":
+				return true;
+			default:
+				return false;
+			}
 		}
 	}
-	
-	static class MarathonErrorDecoder implements ErrorDecoder {
+
+	static final class MarathonErrorDecoder implements ErrorDecoder {
 		@Override
 		public Exception decode(String methodKey, Response response) {
 			return new MarathonException(response.status(), response.reason());
 		}
 	}
-	
+
 	public static Marathon getInstance(String endpoint) {
 		GsonDecoder decoder = new GsonDecoder(ModelUtils.GSON);
 		GsonEncoder encoder = new GsonEncoder(ModelUtils.GSON);
