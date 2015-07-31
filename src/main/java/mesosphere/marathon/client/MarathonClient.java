@@ -27,9 +27,14 @@ public class MarathonClient {
 	}
 	
 	public static Marathon getInstance(String endpoint) {
-		GsonDecoder decoder = new GsonDecoder(ModelUtils.GSON);
-		GsonEncoder encoder = new GsonEncoder(ModelUtils.GSON);
-		return Feign.builder().encoder(encoder).decoder(decoder)
+		return getInstance(Feign.builder(), endpoint);
+	}
+
+	public static Marathon getInstance(Feign.Builder builder, String endpoint) {
+		final GsonDecoder decoder = new GsonDecoder(ModelUtils.GSON);
+		final GsonEncoder encoder = new GsonEncoder(ModelUtils.GSON);
+		return builder
+				.encoder(encoder).decoder(decoder)
 				.errorDecoder(new MarathonErrorDecoder())
 				.requestInterceptor(new MarathonHeadersInterceptor())
 				.target(Marathon.class, endpoint);
