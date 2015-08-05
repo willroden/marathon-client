@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hamcrest.Matcher;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.*;
 
 import com.squareup.okhttp.mockwebserver.MockResponse;
 import com.squareup.okhttp.mockwebserver.rule.MockWebServerRule;
@@ -47,6 +45,19 @@ public class MarathonClientTest {
         assertThat(healthChecks, (Matcher) hasItem(hasProperty("path", is("/health"))));
         assertThat(app.getDeployments().size(), equalTo(1));
         assertThat(app.getDeployments(), (Matcher)  hasItem(hasProperty("id", is("5cd987cd-85ae-4e70-8df7-f1438367d9cb"))));
+    }
+
+    @Test
+    public void testGetApp404() {
+        server.enqueue(new MockResponse().setResponseCode(404).setBody("some weird 404 message"));
+        try {
+            App app = marathon.getApp("foo").getApp();
+            Assert.fail("We should have thrown an exception by now");
+        } catch(MarathonException e) {
+            assertThat(e.getStatus(), equalTo(404));
+        } catch(Exception e) {
+            Assert.fail("Wrong exception! We should have seen a MarathonException.  Instead we saw:" + e.getClass().getName());
+        }
     }
 
     @Test
