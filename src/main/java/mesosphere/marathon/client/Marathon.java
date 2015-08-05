@@ -57,10 +57,14 @@ public interface Marathon {
     // Groups
 	@RequestLine("POST /v2/groups")
 	Result createGroup(Group group) throws MarathonException;
-	
+
+	@RequestLine("PUT /v2/groups/{id}")
+	Result updateGroup(@Param("id") String id, Group group, @Param("force") boolean force,
+			@Param("dryRun") boolean dryRun) throws MarathonException;
+
 	@RequestLine("DELETE /v2/groups/{id}")
 	Result deleteGroup(@Param("id") String id) throws MarathonException;
-	
+
 	@RequestLine("GET /v2/groups/{id}")
 	Group getGroup(@Param("id") String id) throws MarathonException;
 
