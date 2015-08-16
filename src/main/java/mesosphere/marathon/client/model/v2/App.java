@@ -11,6 +11,7 @@ import mesosphere.marathon.client.utils.ModelUtils;
 public class App {
 	private String id;
 	private String cmd;
+	private String version;
 	private Integer instances;
 	private Double cpus;
 	private Double mem;
@@ -50,6 +51,14 @@ public class App {
 
 	public void setCmd(String cmd) {
 		this.cmd = cmd;
+	}
+
+	public String getVersion() {
+		return version;
+	}
+
+	public void setVersion(String version) {
+		this.version = version;
 	}
 
 	public Integer getInstances() {
