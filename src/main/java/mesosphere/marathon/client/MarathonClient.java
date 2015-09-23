@@ -22,7 +22,7 @@ public class MarathonClient {
 	static class MarathonErrorDecoder implements ErrorDecoder {
 		@Override
 		public Exception decode(String methodKey, Response response) {
-			return new MarathonException(response.status(), response.reason());
+			return new MarathonException(response.status(), response.toString());
 		}
 	}
 	
