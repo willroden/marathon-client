@@ -23,6 +23,11 @@ public interface Marathon {
 	@RequestLine("GET /v2/apps")
 	GetAppsResponse getApps();
 
+	@RequestLine("GET /v2/apps?cmd={cmd}&id={id}&label={labelSelector}")
+	GetAppsResponse filterApps(@Param("cmd") String command,
+			@Param(value = "id", expander = AppIdNormalizer.class) String id,
+			@Param("labelSelector") String labelSelector);
+
 	@RequestLine("GET /v2/apps/{id}")
 	GetAppResponse getApp(@Param(value = "id", expander = AppIdNormalizer.class) String id) throws MarathonException;
 
