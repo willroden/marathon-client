@@ -1,6 +1,7 @@
 package mesosphere.marathon.client.model.v2;
 
 import java.util.Collection;
+import java.util.List;
 
 import mesosphere.marathon.client.utils.ModelUtils;
 
@@ -9,6 +10,8 @@ public class Docker {
 	private String network;
 	private Collection<Port> portMappings;
     private Boolean forcePullImage;
+	private List<Parameter> parameters;
+	private boolean privileged;
 
     public Boolean getForcePullImage() {
         return forcePullImage;
@@ -40,6 +43,22 @@ public class Docker {
 
 	public void setPortMappings(Collection<Port> portMappings) {
 		this.portMappings = portMappings;
+	}
+
+	public boolean isPrivileged() {
+		return privileged;
+	}
+
+	public void setPrivileged(boolean privileged) {
+		this.privileged = privileged;
+	}
+
+	public List<Parameter> getParameters() {
+		return parameters;
+	}
+
+	public void setParameters(List<Parameter> parameters) {
+		this.parameters = parameters;
 	}
 
 	@Override
