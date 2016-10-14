@@ -70,6 +70,9 @@ public interface Marathon {
 	@RequestLine("DELETE /v2/groups/{id}")
 	Result deleteGroup(@Param("id") String id) throws MarathonException;
 
+    @RequestLine("DELETE /v2/groups/{id}?force={force}")
+    Result deleteGroup(@Param("id") String id, @Param("force") boolean force) throws MarathonException;
+
 	@RequestLine("GET /v2/groups/{id}")
 	Group getGroup(@Param("id") String id) throws MarathonException;
 
@@ -78,10 +81,10 @@ public interface Marathon {
     // Deployments
 	@RequestLine("GET /v2/deployments")
 	List<Deployment> getDeployments();
-	
+
 	@RequestLine("DELETE /v2/deployments/{deploymentId}")
 	void cancelDeploymentAndRollback(@Param("deploymentId") String id);
-	
+
 	@RequestLine("DELETE /v2/deployments/{deploymentId}?force=true")
 	void cancelDeployment(@Param("deploymentId") String id);
 
