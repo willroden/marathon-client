@@ -28,6 +28,7 @@ public class App {
     private Collection<HealthCheck> healthChecks;
     private UpgradeStrategy upgradeStrategy;
     private Collection<Deployment> deployments;
+	private List<String> dependencies;
 
     public UpgradeStrategy getUpgradeStrategy() {
         return upgradeStrategy;
@@ -202,11 +203,19 @@ public class App {
     public void setDeployments(Collection<Deployment> deployments) {
         this.deployments = deployments;
     }
-    
+
     public void addDeployment(Deployment deployment) {
         this.deployments = (this.deployments != null) ? this.deployments : new ArrayList<Deployment>();
         this.deployments.add(deployment);
     }
+
+	public List<String> getDependencies() {
+		return dependencies;
+	}
+
+	public void setDependencies(List<String> dependencies) {
+		this.dependencies = dependencies;
+	}
 
 	public Map<String, String> getLabels() {
 		return labels;
